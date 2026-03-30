@@ -20,10 +20,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private Long id;
-
+    private String firstName;
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
-
     @Column(nullable = false, unique = true)
     private String email;
 
