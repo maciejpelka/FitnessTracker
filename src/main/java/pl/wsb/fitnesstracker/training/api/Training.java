@@ -1,27 +1,37 @@
 package pl.wsb.fitnesstracker.training.api;
 
 import lombok.Getter;
+import org.springframework.data.annotation.Id;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
-
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 import java.util.Date;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Entity
+@Table(name = "trainings")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Training {
-
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+@ManyToOne
+@JoinColumn(name = "user_id")
     private User user;
-
+@Column(nullable = false)
     private Date startTime;
-
     private Date endTime;
-
+@Column(nullable = false)
     private ActivityType activityType;
-
     private double distance;
-
     private double averageSpeed;
+
+    public void setUser(User user) { this.user = user; }
 
     public Training(
             final User user,
