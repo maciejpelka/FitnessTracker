@@ -1,7 +1,6 @@
 package pl.wsb.fitnesstracker.training.api;
 
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 import jakarta.annotation.Nullable;
