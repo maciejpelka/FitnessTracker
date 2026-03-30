@@ -18,11 +18,10 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private Long id;
-
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private int totalTrainings;
-
     private double totalDistance;
-
     private int totalCaloriesBurned;
 
     public Statistics(int totalTrainings, double totalDistance, int totalCaloriesBurned) {
