@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.training.internal.TrainingRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +35,7 @@ class InitialDataLoader {
 
     private final JpaRepository<User, Long> userRepository;
 
-    private final JpaRepository<Training, Long> trainingRepository;
+    private final TrainingRepository trainingRepository;
 
     @EventListener
     @Transactional
@@ -46,7 +47,14 @@ class InitialDataLoader {
 
         List<User> sampleUserList = generateSampleUsers();
         List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
+        Long emmaId = sampleUserList.get(0).getId();
+        double emmaDistance = trainingRepository.calculateTotalDistanceForUser(emmaId);
 
+        log.info("==========================================");
+        log.info("Suma kilometrów (Emma) to: " + emmaDistance + " km");
+        log.info("==========================================");
+
+        log.info("Finished loading initial data");
 
         log.info("Finished loading initial data");
     }
